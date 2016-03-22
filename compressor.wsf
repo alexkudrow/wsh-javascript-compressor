@@ -11,9 +11,15 @@ Distributed under the terms of the MIT license.
 </description>
 
 <unnamed
-	name="sourceFile"
+	name="sourcePath"
 	helpstring="Javascript source file path"
 	required="true"
+/>
+
+<unnamed
+	name="newPath"
+	helpstring="Compressed file path"
+	required="false"
 />
 
 <!-- <unnamed
@@ -73,10 +79,11 @@ Usage examples:</example> -->
 	}
 
 	function parseFilePath(filePath) {
-		var parts = [],
-			extentionPos;
+		var filePath = filePath || '',
+		    parts = [],
+		    extentionPos;
 
-		parts['fullpath'] = filePath;
+		parts['path'] = filePath;
 		parts['dirname'] = filePath.substring(0, Math.max(filePath.lastIndexOf('\\'), filePath.lastIndexOf('/')) + 1);
 		parts['basename'] = filePath.replace(parts['dirname'], '');
 		
@@ -97,15 +104,28 @@ Usage examples:</example> -->
 		}
 
 		var sourceFile = parseFilePath(params[0]);
-
-		var script = getFileContents(sourceFile['fullpath']);
+		var script = getFileContents(sourceFile['path']);
 
 		if (!script) {
-			WScript.Echo('File is empty. Nothing to compress.\n\n' + sourceFile['fullpath']);
+			WScript.Echo('File is empty. Nothing to compress.\n\n' + sourceFile['path']);
 			return;
 		}
 
-		var newFilePath = sourceFile['dirname'] + sourceFile['filename'] + '.min' + sourceFile['extension'];
+		var newFile,
+		    fileSuffics = '.min';
+
+		if (!params[1]) {
+			newFile = sourceFile;
+		} else {
+			newFile = parseFilePath(params[1]);
+
+			if (!newFile['dirname']) {
+				newFile['dirname'] = sourceFile['dirname'];
+				fileSuffics = '';
+			}
+		}
+
+		var newFilePath = newFile['dirname'] + newFile['filename'] + fileSuffics + newFile['extension'];
 
 		writeToFile(newFilePath, pack(script));
 	}
