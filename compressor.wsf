@@ -82,7 +82,7 @@ Usage examples:</example> -->
 		var script = getFileContents(filePath);
 
 		if (script !== '') {
-			var fileDir = filePath.match(/^(.*[\\\/])/).shift(),
+			var fileDir = filePath.substring(0, Math.max(filePath.lastIndexOf('\\'), filePath.lastIndexOf('/')) + 1),
 			    fileName = filePath.replace(fileDir, ''),
 			    extPos = fileName.lastIndexOf('.'),
 			    fileNameNoExt = (extPos === -1) ? fileName : fileName.substring(0, extPos),
