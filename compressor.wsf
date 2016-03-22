@@ -72,6 +72,22 @@ Usage examples:</example> -->
 		fileHandler.Close();
 	}
 
+	function parseFilePath(filePath) {
+		var parts = [],
+			extentionPos;
+
+		parts['fullpath'] = filePath;
+		parts['dirname'] = filePath.substring(0, Math.max(filePath.lastIndexOf('\\'), filePath.lastIndexOf('/')) + 1);
+		parts['basename'] = filePath.replace(parts['dirname'], '');
+		
+		extentionPos = parts['basename'].lastIndexOf('.');
+
+		parts['filename'] = (extentionPos === -1) ? parts['basename'] : parts['basename'].substring(0, extentionPos);
+		parts['extension'] = parts['basename'].replace(parts['filename'], '');
+
+		return parts;
+	}
+
 	function main() {
 		var params = getStartParameters();
 
@@ -80,25 +96,18 @@ Usage examples:</example> -->
 			return;
 		}
 
-		var filePath = params[0];
+		var sourceFile = parseFilePath(params[0]);
 
-		var script = getFileContents(filePath);
+		var script = getFileContents(sourceFile['fullpath']);
 
 		if (!script) {
-			WScript.Echo('Nothing to compress. File is empty:\n' + filePath);
+			WScript.Echo('File is empty. Nothing to compress.\n\n' + sourceFile['fullpath']);
 			return;
 		}
 
-		var fileDir = filePath.substring(0, Math.max(filePath.lastIndexOf('\\'), filePath.lastIndexOf('/')) + 1),
-		    fileName = filePath.replace(fileDir, ''),
-		    extPos = fileName.lastIndexOf('.'),
-		    fileNameNoExt = (extPos === -1) ? fileName : fileName.substring(0, extPos),
-		    fileExt = fileName.replace(fileNameNoExt, ''),
-		    filePathMin = fileDir + fileNameNoExt + '.min' + fileExt;
+		var newFilePath = sourceFile['dirname'] + sourceFile['filename'] + '.min' + sourceFile['extension'];
 
-		script = pack(script);
-
-		writeToFile(filePathMin, script);
+		writeToFile(newFilePath, pack(script));
 	}
 
 	main();
