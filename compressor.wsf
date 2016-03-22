@@ -72,30 +72,36 @@ Usage examples:</example> -->
 		fileHandler.Close();
 	}
 
-	var args = getArguments();
+	function main() {
+		var args = getArguments();
 
-	if (!args.length) {
-		WScript.Arguments.ShowUsage();
-	} else {
+		if (!args.length) {
+			WScript.Arguments.ShowUsage();
+			return;
+		}
+
 		var filePath = args[0];
 
 		var script = getFileContents(filePath);
 
-		if (script !== '') {
-			var fileDir = filePath.substring(0, Math.max(filePath.lastIndexOf('\\'), filePath.lastIndexOf('/')) + 1),
-			    fileName = filePath.replace(fileDir, ''),
-			    extPos = fileName.lastIndexOf('.'),
-			    fileNameNoExt = (extPos === -1) ? fileName : fileName.substring(0, extPos),
-			    fileExt = fileName.replace(fileNameNoExt, ''),
-			    filePathMin = fileDir + fileNameNoExt + '.min' + fileExt;
-
-			script = pack(script);
-
-			writeToFile(filePathMin, script);
-		} else {
+		if (!script) {
 			WScript.Echo('Nothing to compress. File is empty:\n' + filePath);
+			return;
 		}
+
+		var fileDir = filePath.substring(0, Math.max(filePath.lastIndexOf('\\'), filePath.lastIndexOf('/')) + 1),
+		    fileName = filePath.replace(fileDir, ''),
+		    extPos = fileName.lastIndexOf('.'),
+		    fileNameNoExt = (extPos === -1) ? fileName : fileName.substring(0, extPos),
+		    fileExt = fileName.replace(fileNameNoExt, ''),
+		    filePathMin = fileDir + fileNameNoExt + '.min' + fileExt;
+
+		script = pack(script);
+
+		writeToFile(filePathMin, script);
 	}
+
+	main();
 ]]></script>
 
 </job>
