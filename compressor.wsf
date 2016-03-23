@@ -2,42 +2,26 @@
 <job>
 
 <runtime>
-<description>Javascript compressing script for Windows command line or WSH.
-Takes js source file as an argument and creates in same directory *.min.js file.
+<usage>Javascript compression script for Windows Script Host and command line.
+
+Drag your javascript file over the compressor script and in the directory with the source file appears minified version. Or run compression from the command line, which allows to set advanced options.
+
+Usage: compressor.wsf sourcePath [newPath]
+
+Command line examples:
+
+compressor.wsf source.js
+compressor.wsf C:\path\source.core.js
+compressor.wsf C:\path\source.js custom_name.pack.js
+compressor.wsf C:\path\source.js "X:\custom dir\source.min.js"
+
+Project site: http://github.com/alexkudrow/wsh-javascript-compressor
 
 Author: Alex Kudrow (http://github.com/alexkudrow), 2016
 Based on packer script by Dean Edwards (http://dean.edwards.name/packer)
-Distributed under the terms of the MIT license.
-</description>
 
-<unnamed
-	name="sourcePath"
-	helpstring="Javascript source file path"
-	required="true"
-/>
-
-<unnamed
-	name="newPath"
-	helpstring="Compressed file path"
-	required="false"
-/>
-
-<!-- <unnamed
-	name="base62Encode"
-	helpstring="Encode source to Base 62"
-	required="false"
-	type="Boolean"
-/>
-
-<unnamed
-	name="shrinkVars"
-	helpstring="Shrink variable names"
-	required="false"
-	type="Boolean"
-/>
-
-<example>
-Usage examples:</example> -->
+Distributed under the terms of the MIT license
+</usage>
 </runtime>
 
 <script language="JScript"><![CDATA[
