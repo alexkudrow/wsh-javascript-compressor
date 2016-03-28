@@ -107,6 +107,14 @@ Distributed under the terms of the MIT license
 				newFile['dirname'] = sourceFile['dirname'];
 				fileSuffics = '';
 			}
+
+			if (newFile['basename']) {
+				fileSuffics = '';
+			} else {
+				newFile['basename'] = sourceFile['basename'];
+				newFile['filename'] = sourceFile['filename'];
+				newFile['extension'] = sourceFile['extension'];
+			}
 		}
 
 		var newFilePath = newFile['dirname'] + newFile['filename'] + fileSuffics + newFile['extension'];
