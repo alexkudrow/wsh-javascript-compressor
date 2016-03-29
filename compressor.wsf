@@ -4,7 +4,7 @@
 <runtime>
 <usage>Javascript compression script for Windows Script Host and command line.
 
-Drag your javascript file over the compressor script and in the directory with the source file appears minified version. Or run compression from the command line, which allows to set advanced options.
+Drag your javascript file over the compressor script and in the directory with the source file appears minified version, or run compression from the command line, which allows to set advanced options.
 
 Usage: compressor.wsf sourcePath [newPath]
 
@@ -13,7 +13,8 @@ Command line examples:
 compressor.wsf source.js
 compressor.wsf C:\path\source.core.js
 compressor.wsf C:\path\source.js custom_name.pack.js
-compressor.wsf C:\path\source.js "X:\custom dir\source.min.js"
+compressor.wsf C:\path\source.js "X:\custom dir\"
+compressor.wsf C:\path\source.js X:\custom_dir\custom_name.js
 
 Project site: http://github.com/alexkudrow/wsh-javascript-compressor
 
