@@ -35,7 +35,7 @@ compressor.wsf source.js custom_name.js                             // custom_na
 ## Links
 
 - Project site: http://github.com/alexkudrow/wsh-javascript-compressor
-- Author: Alex Kudrow (http://github.com/alexkudrow), 2016
+- Author: Alex Kudrow (http://github.com/alexkudrow)
 - Based on packer script by Dean Edwards (http://dean.edwards.name/packer)
 
 ## License
