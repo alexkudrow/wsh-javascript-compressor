@@ -41,3 +41,5 @@ compressor.wsf source.js custom_name.js                             // custom_na
 ## License
 
 Distributed under the terms of the [MIT license](https://opensource.org/licenses/MIT)
+
+© 2016 Alex Kudrow (http://github.com/alexkudrow)
