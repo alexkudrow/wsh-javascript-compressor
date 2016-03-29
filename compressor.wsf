@@ -70,7 +70,7 @@ Distributed under the terms of the MIT license
 		parts['path'] = filePath;
 		parts['dirname'] = filePath.substring(0, Math.max(filePath.lastIndexOf('\\'), filePath.lastIndexOf('/')) + 1);
 		parts['basename'] = filePath.replace(parts['dirname'], '');
-		
+
 		extentionPos = parts['basename'].lastIndexOf('.');
 
 		parts['filename'] = (extentionPos === -1) ? parts['basename'] : parts['basename'].substring(0, extentionPos);
